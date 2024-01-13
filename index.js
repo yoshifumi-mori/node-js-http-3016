@@ -3,7 +3,7 @@ const http = require('node:http');
 const pug = require('pug');
 const server = http
   .createServer((req, res) => {
-    console.info(`[${now}] Requested by ${req.socket.remoteAddress}`);
+    console.info(`Requested by ${req.socket.remoteAddress}`);
     res.writeHead(200, {
       'Content-Type': 'text/html; charset=utf-8'
     });
@@ -56,6 +56,7 @@ const server = http
           .on('end', () => {
             const answer = new URLSearchParams(rawData);
             const body = `${answer.get('name')}さんは${answer.get('favorite')}に投票しました`;
+            console.info(body);
             res.write(`<!DOCTYPE html><html lang="ja"><body><h1>${body}</h1></body></html>`);
             res.end();
           });
